@@ -1,0 +1,94 @@
+<!-- Interactive savings estimator widget for the landing page.
+     Drop this just before the closing </section> of the pricing / CTA area.
+     It parses a lead email, extracts the domain, and shows a plain-text
+     "monthly time saved" estimate based on the published price tiers.
+     No external assets, no network, no cookies. -->
+<section class="py-16 md:py-20 bg-white" id="estimator">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="text-center mb-10">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">How much time could this save your team?</h2>
+      <p class="text-gray-600">Drop a lead email. We show a rough monthly saving estimate next to our price tiers.</p>
+    </div>
+    <form id="estimator-form" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto mb-8">
+      <label class="flex-1 flex items-center gap-2 bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700">
+        <span class="text-gray-400">Enter lead email:</span>
+        <input type="email" id="estimator-email" required class="flex-1 bg-transparent text-gray-900 placeholder-gray-400 focus:outline-none" autocomplete="email" placeholder="name@company.com">
+      </label>
+      <button type="submit" class="btn-primary whitespace-nowrap">Estimate</button>
+    </form>
+    <div id="estimator-result" class="hidden max-w-lg mx-auto text-sm text-gray-700 bg-gray-50 rounded-xl p-4 border border-gray-200"></div>
+    <p id="estimator-empty" class="text-center text-sm text-gray-500 mt-4">Waiting for input.</p>
+  </div>
+</section>
+
+<script>
+(function () {
+  var form = document.getElementById('estimator-form');
+  var emailInput = document.getElementById('estimator-email');
+  var resultNode = document.getElementById('estimator-result');
+  var emptyNode = document.getElementById('estimator-empty');
+
+  var TIER_COSTS = [
+    { name: 'Single Workflow', cost: 2500 },
+    { name: 'Automation Suite', cost: 6500 },
+    { name: 'Retainer', cost: 3500, perMonth: true }
+  ];
+
+  var handleEstimate = function (email) {
+    var at = email.indexOf('@');
+    var domain = at >= 0 ? email.slice(at + 1) : '';
+    var domainDisplay = domain || 'unknown domain';
+    var domainClean = domainDisplay.toLowerCase().split('?')[0].split('#')[0].split('/')[0];
+
+    // Very rough heuristic for copy, not a promise.
+    // Small team: 8 hrs/week across 2 staff doing manual transfer = ~32 hrs/month.
+    var estimatedHoursPerMonth = 24;
+    var hourlyRate = 60;
+    var monthlySaving = estimatedHoursPerMonth * hourlyRate;
+
+    var lines = [];
+    lines.push('<strong>You entered:</strong> ' + email + '<br/>');
+    lines.push('<strong>Parsed domain:</strong> ' + domainClean + '<br/>');
+    lines.push('<strong>Plain-text estimate:</strong> If 2 staff spend ~24 hrs/month on manual workflows, that is about AUD ' + monthlySaving.toLocaleString() + '/month in time.<br/><br/>');
+    lines.push('<strong>How our tiers compare:</strong><br/>');
+    TIER_COSTS.forEach(function (tier) {
+      var displayCost = tier.perMonth ? (tier.cost + '/month') : ('$' + tier.cost.toLocaleString() + ' (one-time)');
+      var ratio = monthlySaving / tier.cost;
+      lines.push('- ' + tier.name + ': ' + displayCost + ' &mdash; breakeven inside ' + (ratio >= 1 ? 'the first month' : Math.round(tier.cost / monthlySaving) + ' months') + '<br/>');
+    });
+    lines.push('<br/><span class="text-gray-500">This is an illustrative figure, not a quotation or audit.</span>');
+
+    resultNode.innerHTML = lines.join('');
+    resultNode.classList.remove('hidden');
+    emptyNode.classList.add('hidden');
+  };
+
+  if (form) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var value = emailInput.value.trim();
+      if (!value) {
+        if (resultNode) resultNode.classList.add('hidden');
+        if (emptyNode) {
+          emptyNode.classList.remove('hidden');
+          emptyNode.textContent = 'Please enter an email address first.';
+        }
+        return;
+      }
+      if (emptyNode) emptyNode.classList.add('hidden');
+      handleEstimate(value);
+    });
+  }
+
+  // If a URL query has ?email= already, seed the estimator on load.
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var seeded = params.get('email');
+    if (seeded && form && emailInput) {
+      emailInput.value = seeded;
+      handleEstimate(seeded);
+      emailInput.focus();
+    }
+  } catch (e) {}
+})();
+</script>

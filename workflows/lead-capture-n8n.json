@@ -1,0 +1,299 @@
+{
+  "$schema": "https://docs.n8n.io/workflows/workflow.json",
+  "name": "Lead Capture, Enrich, CRM Insert, Notify",
+  "n8nVersion": "1.50.0",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ingest-lead",
+        "responseMode": "onReceived",
+        "responseData": "allEntries",
+        "options": {}
+      },
+      "id": "trigger-webhook",
+      "name": "Webhook: New Lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [220, 300],
+      "webhookId": "auto-lead-capture"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.email }}",
+              "operator": "isEmpty",
+              "value2": ""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "check-email-present",
+      "name": "Has Email?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [420, 300]
+    },
+    {
+      "parameters": {
+        "has": "=",
+        "hasInput": "={{ $json.email }}",
+        "hasValue": "hello@krk.io",
+        "allowUnauthorizedCerts": false,
+        "options": {}
+      },
+      "id": "enrich-lead",
+      "name": "Enrich: Clearbit/Apollo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [660, 300],
+      "notesInWorkflow": true,
+      "notes": {
+        "short": "Swap URL for your paid enrichment provider. Free tier: OpenRouter with a people-data model."
+      },
+      "options": {
+        "auth": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "queryParameters": {
+          "queryInputs": [
+            {
+              "name": "email",
+              "value": "={{ $json.email }}"
+            },
+            {
+              "name": "ip",
+              "value": "={{ $json.ip }}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "contact",
+        "operation": "create",
+        "options": {},
+        "credentials": {
+          "hubspot_api": {
+            "_name": "HubSpot Personal Access Token (required for production)",
+            "token": "{{ HUBSPOT_PAT }}"
+          }
+        },
+        "properties": {
+          "email": [
+            "={{ $json.email }}"
+          ],
+          "firstname": [
+            "={{ $json.first_name }}"
+          ],
+          "lastname": [
+            "={{ $json.last_name }}"
+          ],
+          "jobtitle": [
+            "={{ $json.job_title }}"
+          ],
+          "company": [
+            "={{ $json.company }}"
+          ],
+          "phone": [
+            "={{ $json.phone }}"
+          ]
+        }
+      },
+      "id": "hubspot-create-contact",
+      "name": "HubSpot: Create Contact",
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 4.3,
+      "position": [880, 300]
+    },
+    {
+      "parameters": {
+        "resource": "spreadsheet",
+        "operation": "append",
+        "application": "googleSheets",
+        "options": {},
+        "attachment": {
+          "file": ""
+        },
+        "sheetName": "Leads Raw",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $json.email }}",
+            "Source": "={{ $json.source || 'webform' }}",
+            "Enriched": "=true",
+            "Enrichment Timestamp": "={{ new Date().toISOString() }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "log-to-google-sheets",
+      "name": "Log to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [880, 520],
+      "disabled": true,
+      "notes": "Enable when you wire Google Sheets credentials."
+    },
+    {
+      "parameters": {
+        "channel": {
+          "content": "={{ $json.email }}"
+        },
+        "text": "New lead captured!\n\nName: {{$json.first_name}} {{$json.last_name}}\nEmail: {{$json.email}}\nCompany: {{$json.company}}\nRole: {{$json.job_title}}\n\nEnrichment: {{$json.company_size ? $json.company_size : 'pending'}}\n\nhttps://hubspot.com/contacts",
+        "options": {}
+      },
+      "id": "slack-notify-hot-lead",
+      "name": "Slack: Hot Lead Alert",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 3.8,
+      "position": [1120, 400],
+      "disabled": true,
+      "notes": "Configure Slack webhook URL or Bot token in credentials. Only fires when enrichment returns > 50 employees."
+    },
+    {
+      "parameters": {
+        "channel": {
+          "id": "={{ $node[\"Slack: Hot Lead Alert\"].output[0].json.slackChannelId }}"
+        },
+        "text": "={{ $json.summary }}",
+        "options": {}
+      },
+      "id": "placeholder-slack",
+      "name": "(placeholder)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1120, 520],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "operation": "send",
+        "chatId": "={{ $credentials.telegram.chatId }}",
+        "text": "={{ $json.email }} - new lead captured",
+        "additionalFields": {}
+      },
+      "id": "telegram-notify",
+      "name": "Telegram: Notify",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 4.2,
+      "position": [1120, 280],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fromEmail": "no-reply@{{ GOOGLE_DOMAIN }}",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Thanks for your interest — we received your request",
+        "body": "={{ $node[\"Email: Send Welcome\"].parameter[\"body\"] ?? \"Thank you! We'll be in touch shortly.\" }}",
+        "attachments": false,
+        "options": {}
+      },
+      "id": "send-welcome-email",
+      "name": "Email: Send Welcome",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.5,
+      "position": [1340, 300],
+      "disabled": true,
+      "notes": "Configure SMTP or Gmail credentials. Subject line + body are customisable here."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Summarise for downstream\nconst enr = items[0].json;\nitems[0].json.summary = `Name: ${enr.first_name} ${enr.last_name}, ${enr.email}, ${enr.company}, ${enr.job_title}`;\nreturn items;"
+      },
+      "id": "summarise-for-notify",
+      "name": "Summarise for Notifications",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1060, 300]
+    }
+  ],
+  "connections": {
+    "Webhook: New Lead": {
+      "main": [
+        [
+          {
+            "node": "Has Email?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Email?": {
+      "main": [
+        [
+          {
+            "node": "Enrich: Clearbit/Apollo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email: Send Welcome",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "TRUE": [
+        [
+          {
+            "node": "Enrich: Clearbit/Apollo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "FALSE": [
+        [
+          {
+            "node": "Email: Send Welcome",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enrich: Clearbit/Apollo": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: Create Contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: Create Contact": {
+      "main": [
+        [
+          {
+            "node": "Slack: Hot Lead Alert",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Telegram: Notify",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email: Send Welcome",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "meta": {
+    "instanceId": "krk-automation-leadflow-001"
+  }
+}
