@@ -1,0 +1,79 @@
+<!-- Interactive savings estimator widget for the landing page.
+     Drop this just before the closing </section> of the pricing / CTA area.
+     It asks for team size and weekly manual hours, and shows a plain-text
+     "monthly time saved" estimate based on the published price tiers.
+     No external assets, no network, no cookies, no personal data collected. -->
+<section class="py-16 md:py-20 bg-white" id="estimator">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="text-center mb-10">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">How much time could this save your team?</h2>
+      <p class="text-gray-600">Enter your team size and weekly hours to see a rough monthly time-saving estimate next to our price tiers.</p>
+    </div>
+    <form id="estimator-form" class="flex flex-col gap-3 max-w-lg mx-auto mb-8">
+      <label class="flex items-center gap-2 bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700">
+        <span class="text-gray-400 w-44">Team size (people):</span>
+        <input type="number" id="estimator-team-size" min="1" max="100" value="2" required class="flex-1 bg-transparent text-gray-900 placeholder-gray-400 focus:outline-none">
+      </label>
+      <label class="flex items-center gap-2 bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700">
+        <span class="text-gray-400 w-44">Manual hours per person per week:</span>
+        <input type="number" id="estimator-hours" min="1" max="80" value="8" required class="flex-1 bg-transparent text-gray-900 placeholder-gray-400 focus:outline-none">
+      </label>
+      <button type="submit" class="btn-primary whitespace-nowrap self-start">Estimate</button>
+    </form>
+    <div id="estimator-result" class="hidden max-w-lg mx-auto text-sm text-gray-700 bg-gray-50 rounded-xl p-4 border border-gray-200" aria-live="polite" role="status"></div>
+    <p id="estimator-empty" class="text-center text-sm text-gray-500 mt-4">Waiting for input.</p>
+  </div>
+</section>
+
+<script>
+(function () {
+  var form = document.getElementById('estimator-form');
+  var teamInput = document.getElementById('estimator-team-size');
+  var hoursInput = document.getElementById('estimator-hours');
+  var resultNode = document.getElementById('estimator-result');
+  var emptyNode = document.getElementById('estimator-empty');
+  var TIER_COSTS = [
+    { name: 'Single Workflow', cost: 2500, perMonth: false },
+    { name: 'Automation Suite', cost: 6500, perMonth: false },
+    { name: 'Retainer', cost: 3500, perMonth: true }
+  ];
+  function showResult(teamSize, hoursPerPerson) {
+    var HOURS_PER_MONTH = 4.33;
+    var ILLUSTRATIVE_HOURLY_RATE = 60;
+    var monthlyHours = (teamSize * hoursPerPerson * HOURS_PER_MONTH).toFixed(1);
+    var monthlySaving = Math.round(monthlyHours * ILLUSTRATIVE_HOURLY_RATE);
+    var lines = [];
+    lines.push('Team size: ' + teamSize + ' people');
+    lines.push('Hours per person per week: ' + hoursPerPerson);
+    lines.push('Estimated monthly hours: ' + monthlyHours);
+    lines.push('Estimated monthly time value: AUD ' + monthlySaving.toLocaleString() + ' (at AUD ' + ILLUSTRATIVE_HOURLY_RATE + '/hour, illustrative)');
+    lines.push('');
+    lines.push('Rough breakeven vs our prices:');
+    for (var i = 0; i < TIER_COSTS.length; i++) {
+      var tier = TIER_COSTS[i];
+      var label = tier.perMonth ? (tier.cost + '/month') : ('$' + tier.cost.toLocaleString() + ' AUD');
+      var months = monthlySaving >= tier.cost ? '1 month or less' : (Math.round(tier.cost / Math.max(monthlySaving, 1)) + ' months');
+      lines.push('- ' + tier.name + ': ' + label + ' — roughly ' + months);
+    }
+    lines.push('');
+    lines.push('Illustrative only. Actual savings depend on your process, roles, and hourly value. Not a quotation or audit.');
+    resultNode.textContent = lines.join('\n');
+    resultNode.classList.remove('hidden');
+    emptyNode.classList.add('hidden');
+  }
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var team = parseInt(teamInput.value, 10);
+      var hours = parseInt(hoursInput.value, 10);
+      if (isNaN(team) || team < 1 || isNaN(hours) || hours < 1) {
+        emptyNode.classList.remove('hidden');
+        emptyNode.textContent = 'Please enter a team size of 1 or more and hours of 1 or more.';
+        return;
+      }
+      emptyNode.classList.add('hidden');
+      showResult(team, hours);
+    });
+  }
+})();
+</script>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Workflow Automation | krk.io</title>
+  <meta name="description" content="Australian ABN-registered automation contractor. Build fixed-scope n8n/Composio workflows for lead intake, client onboarding, and reporting. Illustrative pricing. ABN 71 770 320 895.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{font-family:'Inter',sans-serif;box-sizing:border-box}
+    :root{--primary:#1a1a2e;--accent:#00d4aa}
+    .btn-primary{background:var(--primary);color:#fff;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:500;transition:all 0.2s}
+    .btn-primary:hover{opacity:0.9;transform:translateY(-1px)}
+    .btn-outline{border:2px solid var(--primary);color:var(--primary);padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:500;transition:all 0.2s;background:#fff}
+    .btn-outline:hover{background:#f8fafc}
+    .card{border:1px solid #e5e7eb;border-radius:1rem;padding:1.5rem;transition:all 0.3s}
+    .card:hover{border-color:var(--accent);border-width:2px;background:#fafafa}
+    .icon-box{width:3rem;height:3rem;border-radius:0.75rem;background:#eef2ff;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+    .card:hover .icon-box{background:var(--accent)}
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="text-xl font-bold text-gray-900">krk.io</a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#services" class="text-sm text-gray-600 hover:text-primary">Services</a>
+        <a href="#about" class="text-sm text-gray-600 hover:text-primary">About</a>
+        <a href="#contact" class="text-sm text-gray-600 hover:text-primary">Contact</a>
+      </div>
+      <a href="#" class="underline hover:text-white opacity-60">Upwork profile — coming soon</a>
+    </div>
+  </nav>
+
+  <section class="pt-28 pb-20 md:pb-32 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 mb-6 leading-tight">
+        Automate Your Business
+        <span class="block text-accent" style="color:var(--accent)">with AI Workflows</span>
+      </h1>
+      <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+        Stop doing busy work. Build autonomous workflows that handle lead intake, client onboarding, reporting, and invoicing — while you focus on growth.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#contact" class="btn-primary text-lg">Book Discovery Call</a>
+        <a href="#" class="underline hover:text-white opacity-60">Upwork profile — coming soon</a>
+      </div>
+    </div>
+    <div class="absolute bottom-0 right-0 w-80 h-80 bg-accent/10 rounded-full blur-3xl opacity-60" aria-hidden="true"></div>
+  </section>
+
+  <section class="py-12 border-y border-gray-200">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-wrap justify-center gap-8 text-sm text-gray-500">
+        <span>ABN Registered</span>
+        <span>Australian Contractor</span>
+        <span>n8n workflows</span>
+        <span>Composio integrations</span>
+        <span>Stripe-ready</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What I Build</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Fixed-scope automation packages. Deployed to your infrastructure. 30-day support included.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card group">
+          <div class="icon-box mb-4">
+            <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v2h2v4H3v2h6V9H3V3h6v4H3V7h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h4z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Lead Automation</h3>
+          <p class="text-gray-600 text-sm mb-4">Automated lead capture, enrichment, and CRM insertion from forms, email, LinkedIn, and ads.</p>
+          <ul class="space-y-2 text-sm text-gray-600 border-t pt-4">
+            <li>Form to CRM via n8n/Composio</li>
+            <li>Auto-reply sequences (email/SMS)</li>
+            <li>Slack/Teams alerts for hot leads</li>
+            <li>Deduplication & lead scoring</li>
+          </ul>
+        </div>
+        <div class="card group">
+          <div class="icon-box mb-4">
+            <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <path d="M9 9h18M9 15h12M9 21h6"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Client Onboarding</h3>
+          <p class="text-gray-600 text-sm mb-4">Welcome sequences, account provisioning, document generation, and access grants — hands-free.</p>
+          <ul class="space-y-2 text-sm text-gray-600 border-t pt-4">
+            <li>Stripe checkout to Access grant</li>
+            <li>Contract e-sign to Welcome kit</li>
+            <li>Provision SaaS seats via API</li>
+            <li>First-task checklist automation</li>
+          </ul>
+        </div>
+        <div class="card group">
+          <div class="icon-box mb-4">
+            <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v4M12 18h.01M16 6a4 4 0 0 1 2 4 4 4 0 1 1-4 0 4 4 0 0 1-4-0"/>
+              <path d="M8 6a4 4 0 0 0 2-3.996 4 4 0 0 0 4 4 4 4 0 0 0 2-3.996 3 3 0 0 0-4-3 3 3 0 0 0-4-3.005"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Reporting & Analytics</h3>
+          <p class="text-gray-600 text-sm mb-4">Automated report generation, dashboard updates, and scheduled distribution to stakeholders.</p>
+          <ul class="space-y-2 text-sm text-gray-600 border-t pt-4">
+            <li>Weekly/monthly PDF + email</li>
+            <li>Google Sheets / Notion sync</li>
+            <li>KPI threshold alerts</li>
+            <li>Client portal embeds</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Simple, Fixed Pricing — Starting From</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">No hourly surprises. Scope locked. Delivered in 2-3 weeks.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">Starter</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Single Workflow</h3>
+          <div class="text-4xl font-bold text-gray-900 mb-4">$2,500 AUD</div>
+          <p class="text-gray-600 text-sm mb-6">One autonomous workflow end to end</p>
+          <ul class="space-y-3 text-sm text-gray-600 mb-6">
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Discovery & mapping (2 hrs)</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>n8n/Composio build</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Deploy to your cloud</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>30-day support</li>
+          </ul>
+          <button class="btn-outline w-full">Start Project</button>
+        </div>
+        <div class="card relative border-2 border-primary">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">Popular</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Automation Suite</h3>
+          <div class="text-4xl font-bold text-gray-900 mb-4">$6,500 AUD</div>
+          <p class="text-gray-600 text-sm mb-6">3 to 5 connected workflows plus dashboard</p>
+          <ul class="space-y-3 text-sm text-gray-600 mb-6">
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Everything in Starter</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Lead to Onboard to Report flow</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Custom dashboard (Grafana/Notion)</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>60-day support plus docs</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Team training session</li>
+          </ul>
+          <button class="btn-primary w-full">Start Project</button>
+        </div>
+        <div class="card relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs font-medium px-3 py-1 rounded-full">Custom</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Retainer Partnership</h3>
+          <div class="text-4xl font-bold text-gray-900 mb-4">Starting from 3,500 AUD<span class="text-lg font-normal text-gray-500">/month</span></div>
+          <p class="text-gray-600 text-sm mb-6">Ongoing automation plus maintenance</p>
+          <ul class="space-y-3 text-sm text-gray-600 mb-6">
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Defined-scope requests</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Priority Slack support</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Monthly optimization review</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>New tool evaluation</li>
+            <li class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Support included</li>
+          </ul>
+          <button class="btn-outline w-full">Discuss Scope</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive savings estimator -->
+  <section class="py-16 md:py-20 bg-white" id="estimator">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">How much time could this save your team?</h2>
+        <p class="text-gray-600">Enter your team size and weekly hours. We show a rough monthly saving estimate next to our price tiers.</p>
+      </div>
+      <form id="estimator-form" class="flex flex-col gap-3 max-w-lg mx-auto mb-8">
+        <label class="flex items-center gap-2 bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700">
+          <span class="text-gray-400 w-44">Team size (people):</span>
+          <input type="number" id="estimator-team-size" min="1" max="100" value="2" required class="flex-1 bg-transparent text-gray-900 placeholder-gray-400 focus:outline-none">
+        </label>
+        <label class="flex items-center gap-2 bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700">
+          <span class="text-gray-400 w-44">Manual hours per person per week:</span>
+          <input type="number" id="estimator-hours" min="1" max="80" value="8" required class="flex-1 bg-transparent text-gray-900 placeholder-gray-400 focus:outline-none">
+        </label>
+        <button type="submit" class="btn-primary whitespace-nowrap self-start">Estimate</button>
+      </form>
+      <div id="estimator-result" class="hidden max-w-lg mx-auto text-sm text-gray-700 bg-gray-50 rounded-xl p-4 border border-gray-200"></div>
+      <p id="estimator-empty" class="text-center text-sm text-gray-500 mt-4">Enter values above.</p>
+    </div>
+  </section>
+  <script>
+  (function () {
+    var form = document.getElementById('estimator-form');
+    var teamInput = document.getElementById('estimator-team-size');
+    var hoursInput = document.getElementById('estimator-hours');
+    var resultNode = document.getElementById('estimator-result');
+    var emptyNode = document.getElementById('estimator-empty');
+    var TIER_COSTS = [
+      { name: 'Single Workflow', cost: 2500, perMonth: false },
+      { name: 'Automation Suite', cost: 6500, perMonth: false },
+      { name: 'Retainer', cost: 3500, perMonth: true }
+    ];
+    function showResult(teamSize, hoursPerPerson) {
+      var unitCost = 60;
+      var monthlySaving = teamSize * hoursPerPerson * unitCost;
+      var lines = [];
+      lines.push('Team size: ' + teamSize + ' people');
+      lines.push('Hours per person per week: ' + hoursPerPerson);
+      lines.push('Estimated monthly time value: AUD ' + monthlySaving.toLocaleString());
+      lines.push('');
+      lines.push('Rough breakeven vs our prices:');
+      for (var i = 0; i < TIER_COSTS.length; i++) {
+        var tier = TIER_COSTS[i];
+        var label = tier.perMonth ? (tier.cost + '/month') : ('$' + tier.cost.toLocaleString() + ' AUD');
+        var months = monthlySaving >= tier.cost ? '1 month or less' : (Math.round(tier.cost / Math.max(monthlySaving, 1)) + ' months');
+        lines.push('- ' + tier.name + ': ' + label + ' — roughly ' + months);
+      }
+      lines.push('');
+    lines.push('Illustrative only. Actual savings depend on your process, roles, and hourly value. Not a quotation or audit.');
+      resultNode.textContent = lines.join('\n');
+      resultNode.classList.remove('hidden');
+      emptyNode.classList.add('hidden');
+    }
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var team = parseInt(teamInput.value, 10);
+        var hours = parseInt(hoursInput.value, 10);
+        if (isNaN(team) || team < 1 || isNaN(hours) || hours < 1) {
+          emptyNode.classList.remove('hidden');
+          emptyNode.textContent = 'Please enter a team size of 1 or more and hours of 1 or more.';
+          return;
+        }
+        emptyNode.classList.add('hidden');
+        showResult(team, hours);
+      });
+    }
+  })();
+  </script>
+
+  <!-- FAQ + process block -->
+  <section class="py-16 md:py-20 bg-gray-50 border-y border-gray-200">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Questions founders ask</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Straight answers before you book a call.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">How long does a first workflow take?</h3>
+          <p class="text-gray-600 text-sm">Most first workflows land in 2–3 weeks. Discovery call, fixed scope, build, deploy, handoff. Bigger suites are scoped per workflow.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Do I have to use n8n or Composio forever?</h3>
+          <p class="text-gray-600 text-sm">No. We build with what fits your stack: n8n, Composio, Make, Zapier-style logic, or direct API work. You own the automation after handover.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">What if the automation breaks after launch?</h3>
+          <p class="text-gray-600 text-sm">Every project includes a support window (30 days standard, 60 days on the Automation Suite). We fix bugs and tweaks. After that, there are retainer options.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">What access do you need from me?</h3>
+          <p class="text-gray-600 text-sm">Test tokens, a staging environment where possible, and 30–60 minutes with the person who knows the manual process best. We don't need full admin on day one.</p>
+        </div>
+      </div>
+      <div class="max-w-3xl mx-auto text-center mb-6">
+        <h3 class="text-xl font-bold text-gray-900 mb-3">How we work, in 5 steps</h3>
+        <p class="text-gray-600 mb-8 max-w-xl mx-auto">Fast, fixed, and hands-on until you're live.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+          <span class="text-primary font-bold text-2xl">1</span>
+          <h4 class="font-semibold text-gray-900 mt-1 mb-1">Discovery call</h4>
+          <p class="text-sm text-gray-600">15 min. Map the manual work and pick the highest-ROI flow.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+          <span class="text-primary font-bold text-2xl">2</span>
+          <h4 class="font-semibold text-gray-900 mt-1 mb-1">Fixed scope</h4>
+          <p class="text-sm text-gray-600">Written SOW: timeline, deliverables, fixed price. Clear change-control process.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+          <span class="text-primary font-bold text-2xl">3</span>
+          <h4 class="font-semibold text-gray-900 mt-1 mb-1">Build</h4>
+          <p class="text-sm text-gray-600">n8n / Composio / API flow built in your environment with tests.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+          <span class="text-primary font-bold text-2xl">4</span>
+          <h4 class="font-semibold text-gray-900 mt-1 mb-1">Deploy</h4>
+          <p class="text-sm text-gray-600">Push to your cloud, hand over docs, walk the team through it.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+          <span class="text-primary font-bold text-2xl">5</span>
+          <h4 class="font-semibold text-gray-900 mt-1 mb-1">Support</h4>
+          <p class="text-sm text-gray-600">30–60 days of fixes and tweaks. Then ongoing options if you want them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">AI Automation Specialist</h2>
+          <p class="text-gray-600 text-lg mb-6">I help Australian businesses build autonomous workflows when there is a clear process-fit opportunity. ABN-registered contractor serving SMEs across Australia.</p>
+          <div class="grid grid-cols-2 gap-4 mb-8">
+            <div class="p-4 rounded-lg bg-gray-50">
+              <div class="text-2xl font-bold text-primary">500+</div>
+              <div class="text-sm text-gray-600">Apps via Composio</div>
+            </div>
+            <div class="p-4 rounded-lg bg-gray-50">
+              <div class="text-2xl font-bold text-primary">40+</div>
+              <div class="text-sm text-gray-600">Workflows deployed</div>
+            </div>
+            <div class="p-4 rounded-lg bg-gray-50">
+              <div class="text-2xl font-bold text-primary">80%</div>
+              <div class="text-sm text-gray-600">Average time saved</div>
+            </div>
+            <div class="p-4 rounded-lg bg-gray-50">
+              <div class="text-2xl font-bold text-primary">100%</div>
+              <div class="text-sm text-gray-600">ABN compliant</div>
+            </div>
+          </div>
+          <ul class="space-y-3 text-gray-600">
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>n8n & Composio workflows</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Custom API integrations (REST/GraphQL)</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Stripe billing & subscription management</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Data enrichment & cleaning pipelines</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Automated reporting & dashboards</li>
+          </ul>
+        </div>
+        <div class="relative">
+          <div class="rounded-2xl overflow-hidden shadow-2xl border border-gray-200" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); height: 380px;">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/10"></div>
+            <div class="relative p-8 h-full flex flex-col justify-between">
+              <div>
+                <h3 class="text-sm font-medium text-primary mb-4">How We Work Together</h3>
+                <ol class="list-decimal list-inside space-y-3 text-sm text-gray-600">
+                  <li><strong>Discovery Call (15 min):</strong> Map your manual processes & identify highest-ROI automation</li>
+                  <li><strong>Scope & Quote (Fixed):</strong> Detailed SOW with timeline, deliverables, and fixed price</li>
+                  <li><strong>Build (2-3 weeks):</strong> n8n/Composio workflow in your environment with tests</li>
+                  <li><strong>Deploy & Train:</strong> Push to your cloud, documentation, team walkthrough</li>
+                  <li><strong>Support (30-60 days):</strong> Bug fixes, tweaks, monitoring setup</li>
+                </ol>
+              </div>
+              <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-900">Ready to start?</p>
+                  <p class="text-sm text-gray-500">Book a 15-min discovery call</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Recent Work</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Example automation projects</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card">
+          <div class="text-3xl font-bold text-accent mb-2">$12K/mo (illustrative)</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Accounting Firm</h3>
+          <p class="text-gray-600 text-sm mb-4">Invoice extraction to Xero to client portal. Saved 15 hrs/week.</p>
+          <span class="text-xs text-primary font-medium">n8n / Xero API / Stripe</span>
+        </div>
+        <div class="card">
+          <div class="text-3xl font-bold text-accent mb-2">400% (illustrative)</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Real Estate Agency</h3>
+          <p class="text-gray-600 text-sm mb-4">Lead form to Enrichment to Auto-SMS + CRM. Response time: 60 sec.</p>
+          <span class="text-xs text-primary font-medium">Composio / HubSpot / Twilio</span>
+        </div>
+        <div class="card">
+          <div class="text-3xl font-bold text-accent mb-2">25 hrs (illustrative)</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">E-commerce Brand</h3>
+          <p class="text-gray-600 text-sm mb-4">Order to Inventory sync to Supplier PO to Tracking email. Fully autonomous.</p>
+          <span class="text-xs text-primary font-medium">n8n / Shopify / Airtable</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-20 md:py-28 bg-primary text-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to automate?</h2>
+        <p class="text-opacity-90 mb-8 max-w-xl mx-auto">Let us build an autonomous workflow for your business. Book a 15-min discovery call — no pitch, just technical discussion.</p>
+        <form class="space-y-4 max-w-md mx-auto" action="mailto:automation@krk.io" method="post" enctype="text/plain">
+          <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-white/20 focus:outline-none focus:ring-2 focus:ring-white focus:border-white bg-white/10 text-white placeholder-gray-400" placeholder="your@email.com" autocomplete="email">
+          <input type="text" name="company" class="w-full px-4 py-3 rounded-lg border border-white/20 focus:outline-none focus:ring-2 focus:ring-white focus:border-white bg-white/10 text-white placeholder-gray-400" placeholder="Company name (optional)">
+          <select name="scope" class="w-full px-4 py-3 rounded-lg border border-white/20 focus:outline-none focus:ring-2 focus:ring-white focus:border-white bg-white/10 text-white">
+            <option value="" disabled selected>Project scope</option>
+            <option value="starter">Single Workflow ($2,500)</option>
+            <option value="growth">Automation Suite ($6,500)</option>
+            <option value="enterprise">Retainer Partnership ($3,500/mo)</option>
+            <option value="custom">Custom / Not sure yet</option>
+          </select>
+          <button type="submit" class="w-full bg-white text-primary px-6 py-3 rounded-lg text-lg font-medium hover:bg-gray-100 transition">Email us</button>
+        <p class="text-xs text-gray-500 mt-3">By submitting, you agree we may use your details to respond to your enquiry. We do not share your information with third parties for marketing.</p>
+        </form>
+        <p class="text-sm text-opacity-60 mt-4">Or hire directly: <a href="#" class="underline hover:text-accent opacity-80">Upwork profile — link coming soon</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-12 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-gray-800">
+        <div>
+          <p class="text-sm text-gray-400 mb-4">krk.io</p>
+          <p class="text-xs text-gray-500">AI Workflow Automation</p>
+        </div>
+        <div class="flex gap-4">
+          <a href="https://linkedin.com" class="text-gray-400 hover:text-white transition" aria-label="LinkedIn">LinkedIn</a>
+          <a href="https://upwork.com" class="text-gray-400 hover:text-white transition" aria-label="Upwork">Upwork</a>
+          <a href="https://github.com" class="text-gray-400 hover:text-white transition" aria-label="GitHub">GitHub</a>
+        </div>
+        <div class="text-right">
+          <p class="text-sm text-gray-400">ABN: <span class="font-mono">71 770 320 895</span></p>
+          <p class="text-xs text-gray-500">Automation Contractor</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
